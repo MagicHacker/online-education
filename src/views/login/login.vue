@@ -14,7 +14,7 @@
         </el-input>
       </div>
       <div class="login-btn">
-        <el-button type="primary">登录</el-button>
+        <el-button type="primary" @click="loginIn">登录</el-button>
       </div>
     </div>
   </div>
@@ -25,6 +25,9 @@ import { Component, Vue } from "vue-property-decorator";
 export default class Login extends Vue {
   username = "";
   password = "";
+  loginIn(): void {
+    alert(this.username + this.password);
+  }
 }
 </script>
 <style lang="less" scoped>
