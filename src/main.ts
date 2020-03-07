@@ -2,8 +2,8 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import { Button } from "element-ui";
-[Button].forEach(item => {
+import { Button, Input } from "element-ui";
+[Button, Input].forEach(item => {
   Vue.use(item);
 });
 Vue.config.productionTip = false;
