@@ -16,11 +16,19 @@
         </div>
       </div>
     </header>
+    <div class="main-page-area">
+      <side-menu></side-menu>
+    </div>
   </div>
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-@Component
+import sideMenu from "../side-menu/index.vue";
+@Component({
+  components: {
+    sideMenu
+  }
+})
 export default class MainPage extends Vue {
   exit(): void {
     this.$router.replace({ path: "login" });
@@ -69,6 +77,10 @@ export default class MainPage extends Vue {
         justify-content: space-between;
       }
     }
+  }
+  .main-page-area {
+    width: 100%;
+    height: calc(100% - 50px);
   }
 }
 </style>
