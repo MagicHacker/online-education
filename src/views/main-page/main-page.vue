@@ -10,7 +10,7 @@
           <svg-icon iconName="#icon-avatar"></svg-icon>
           <span>欢迎你，admin</span>
         </div>
-        <div>
+        <div @click="exit">
           <svg-icon iconName="#icon-exit"></svg-icon>
           <span>退出登录</span>
         </div>
@@ -19,8 +19,13 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from "vue";
-export default Vue.extend({});
+import { Component, Vue } from "vue-property-decorator";
+@Component
+export default class MainPage extends Vue {
+  exit(): void {
+    this.$router.replace({ path: "login" });
+  }
+}
 </script>
 <style lang="less" scoped>
 .main-page-wrap {
