@@ -1,0 +1,69 @@
+<template>
+  <div class="main-page-wrap">
+    <header class="main-page-header">
+      <div class="main-page-logo">
+        <svg-icon iconName="#icon-logo"></svg-icon>
+        <span>在线教育管理系统</span>
+      </div>
+      <div class="main-page-nav">
+        <div>
+          <svg-icon iconName="#icon-avatar"></svg-icon>
+          <span>欢迎你，admin</span>
+        </div>
+        <div>
+          <svg-icon iconName="#icon-exit"></svg-icon>
+          <span>退出登录</span>
+        </div>
+      </div>
+    </header>
+  </div>
+</template>
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({});
+</script>
+<style lang="less" scoped>
+.main-page-wrap {
+  width: 100%;
+  height: 100%;
+  .main-page-header {
+    width: 100%;
+    height: 50px;
+    box-sizing: border-box;
+    padding: 0 20px;
+    color: #fff;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-image: linear-gradient(
+      to right,
+      #25acfc,
+      #269dfc,
+      #2b89fc,
+      #2c87fc,
+      #3079f9,
+      #356df9
+    );
+    cursor: pointer;
+    .main-page-logo {
+      width: 190px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .main-page-nav {
+      width: 240px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+  }
+}
+</style>
