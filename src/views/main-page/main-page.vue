@@ -18,6 +18,9 @@
     </header>
     <div class="main-page-area">
       <side-menu></side-menu>
+      <div class="main-page-right">
+        <router-view />
+      </div>
     </div>
   </div>
 </template>
@@ -31,7 +34,7 @@ import sideMenu from "../side-menu/index.vue";
 })
 export default class MainPage extends Vue {
   exit(): void {
-    this.$router.replace({ path: "login" });
+    this.$router.replace({ path: "/login" });
   }
 }
 </script>
@@ -81,6 +84,12 @@ export default class MainPage extends Vue {
   .main-page-area {
     width: 100%;
     height: calc(100% - 50px);
+    display: flex;
+    justify-content: space-between;
+    .main-page-right {
+      width: calc(100% - 200px);
+      height: 100%;
+    }
   }
 }
 </style>
