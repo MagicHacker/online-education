@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import { Button, Input } from "element-ui";
+import "./utils/svg-icon.ts";
 [Button, Input].forEach(item => {
   Vue.use(item);
 });
