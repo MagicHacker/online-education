@@ -89,6 +89,7 @@ export default class MainPage extends Vue {
     .main-page-right {
       width: calc(100% - 200px);
       height: 100%;
+      overflow: auto;
     }
   }
 }
