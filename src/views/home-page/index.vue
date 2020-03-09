@@ -145,7 +145,32 @@
             </div>
           </div>
         </div>
-        <div class="order-statistics-right"></div>
+        <div class="order-statistics-right">
+          <div class="order-statistics-right-header">
+            <div>
+              <span>订单统计</span>
+            </div>
+            <div class="order-statistics-right-date">
+              <div class="date-item">
+                <span>今日</span>
+              </div>
+              <div class="date-item">
+                <span>本周</span>
+              </div>
+              <div class="date-item">
+                <span>本月</span>
+              </div>
+              <el-date-picker
+                type="daterange"
+                v-model="orderDate"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+              ></el-date-picker>
+            </div>
+          </div>
+          <div></div>
+        </div>
       </div>
     </div>
     <div class="sales-statistics-wrap">
@@ -181,14 +206,42 @@
             </div>
           </div>
         </div>
-        <div class="sales-statistics-right"></div>
+        <div class="sales-statistics-right">
+          <div class="sales-statistics-right-header">
+            <div>
+              <span>销售统计</span>
+            </div>
+            <div class="sales-statistics-right-date">
+              <div class="date-item">
+                <span>今日</span>
+              </div>
+              <div class="date-item">
+                <span>本周</span>
+              </div>
+              <div class="date-item">
+                <span>本月</span>
+              </div>
+              <el-date-picker
+                type="daterange"
+                v-model="salesDate"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+              ></el-date-picker>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts">
-import Vue from "vue";
-export default Vue.extend({});
+import { Component, Vue } from "vue-property-decorator";
+@Component
+export default class HomePage extends Vue {
+  orderDate = "";
+  salesDate = "";
+}
 </script>
 <style lang="less" scoped>
 .home-page-wrap {
@@ -304,6 +357,7 @@ export default Vue.extend({});
     .order-statistics-area {
       width: 100%;
       height: calc(100% - 40px);
+      display: flex;
       .order-statistics-left {
         width: 160px;
         height: 100%;
@@ -331,6 +385,28 @@ export default Vue.extend({});
           }
         }
       }
+      .order-statistics-right {
+        width: calc(100% - 160px);
+        height: 100%;
+        margin-top: 10px;
+        .order-statistics-right-header {
+          width: 100%;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          box-sizing: border-box;
+          padding: 0px 10px;
+          .order-statistics-right-date {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .date-item {
+              width: 60px;
+            }
+          }
+        }
+      }
     }
   }
   .sales-statistics-wrap {
@@ -348,6 +424,7 @@ export default Vue.extend({});
     .sales-statistics-area {
       width: 100%;
       height: calc(100% - 40px);
+      display: flex;
       .sales-statistics-left {
         width: 160px;
         height: 100%;
@@ -372,6 +449,28 @@ export default Vue.extend({});
           align-items: center;
           .sales-left-change-text {
             color: #d2d2d2;
+          }
+        }
+      }
+      .sales-statistics-right {
+        width: calc(100% - 160px);
+        height: 100%;
+        margin-top: 10px;
+        .sales-statistics-right-header {
+          width: 100%;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          box-sizing: border-box;
+          padding: 0px 10px;
+          .sales-statistics-right-date {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .date-item {
+              width: 60px;
+            }
           }
         }
       }
