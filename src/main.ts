@@ -10,14 +10,25 @@ import {
   MenuItem,
   Tabs,
   TabPane,
-  DatePicker
+  DatePicker,
+  Table,
+  TableColumn
 } from "element-ui";
 import "./utils/svg-icon.ts";
-[Button, Input, Menu, Submenu, MenuItem, Tabs, TabPane, DatePicker].forEach(
-  item => {
-    Vue.use(item);
-  }
-);
+[
+  Button,
+  Input,
+  Menu,
+  Submenu,
+  MenuItem,
+  Tabs,
+  TabPane,
+  DatePicker,
+  Table,
+  TableColumn
+].forEach(item => {
+  Vue.use(item);
+});
 Vue.config.productionTip = false;
 
 new Vue({
