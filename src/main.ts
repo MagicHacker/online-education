@@ -12,7 +12,8 @@ import {
   TabPane,
   DatePicker,
   Table,
-  TableColumn
+  TableColumn,
+  Pagination
 } from "element-ui";
 import "./utils/svg-icon.ts";
 [
@@ -25,7 +26,8 @@ import "./utils/svg-icon.ts";
   TabPane,
   DatePicker,
   Table,
-  TableColumn
+  TableColumn,
+  Pagination
 ].forEach(item => {
   Vue.use(item);
 });

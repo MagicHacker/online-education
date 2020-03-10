@@ -29,6 +29,15 @@
       <el-table-column label="处理前金额" align="center"></el-table-column>
       <el-table-column label="处理后金额" align="center"></el-table-column>
     </el-table>
+    <div class="salary-pagination-wrap">
+      <el-pagination
+        :current-page="currentPage"
+        :page-sizes="[100, 200, 300]"
+        :page-size="100"
+        layout="total, sizes,prev,pager,next,jumper"
+        :total="300"
+      ></el-pagination>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -38,6 +47,7 @@ export default class SalaryManage extends Vue {
   salaryName = "";
   operateType = "";
   dateTime = "";
+  currentPage = 2;
 }
 </script>
 <style lang="less" scoped>
@@ -56,6 +66,9 @@ export default class SalaryManage extends Vue {
     /deep/ .el-input {
       width: 200px;
     }
+  }
+  .salary-pagination-wrap {
+    margin-top: 20px;
   }
 }
 </style>
