@@ -3,31 +3,39 @@
     <div class="order-sales-wrap">
       <div class="order-today">
         <div>
-          <div><span>今日订单总数</span></div>
+          <div>
+            <span>今日订单总数</span>
+          </div>
           <div>200</div>
         </div>
-        <img src="../../../public/images/order-t.png" alt="" />
+        <img src="../../../public/images/order-t.png" alt />
       </div>
       <div class="sales-today">
         <div>
-          <div><span>今日销售总额</span></div>
+          <div>
+            <span>今日销售总额</span>
+          </div>
           <div>400</div>
         </div>
-        <img src="../../../public/images/sales-t.png" alt="" />
+        <img src="../../../public/images/sales-t.png" alt />
       </div>
       <div class="sales-yestarday">
         <div>
-          <div><span>昨日销售总额</span></div>
+          <div>
+            <span>昨日销售总额</span>
+          </div>
           <div>600</div>
         </div>
-        <img src="../../../public/images/sales-y.png" alt="" />
+        <img src="../../../public/images/sales-y.png" alt />
       </div>
       <div class="sales-week">
         <div>
-          <div><span>近7天销售总额</span></div>
+          <div>
+            <span>近7天销售总额</span>
+          </div>
           <div>1000</div>
         </div>
-        <img src="../../../public/images/sales-total.png" alt="" />
+        <img src="../../../public/images/sales-total.png" alt />
       </div>
     </div>
     <div class="home-overview-wrap">
@@ -169,7 +177,12 @@
               ></el-date-picker>
             </div>
           </div>
-          <div></div>
+          <echarts-view
+            chartId="order"
+            chartWidth="100%"
+            chartHeight="270px"
+            yAxisName="单位(笔)"
+          ></echarts-view>
         </div>
       </div>
     </div>
@@ -230,6 +243,12 @@
               ></el-date-picker>
             </div>
           </div>
+          <echarts-view
+            chartId="sales"
+            chartWidth="100%"
+            chartHeight="270px"
+            yAxisName="单位(笔)"
+          ></echarts-view>
         </div>
       </div>
     </div>
@@ -237,7 +256,12 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-@Component
+import echartsView from "../../components/echarts-view/index.vue";
+@Component({
+  components: {
+    echartsView
+  }
+})
 export default class HomePage extends Vue {
   orderDate = "";
   salesDate = "";
