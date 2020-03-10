@@ -1,7 +1,14 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require("path");
 const resolve = dir => path.join(__dirname, dir);
+const debug = process.env.Node_ENV !== "production";
 module.exports = {
+  configureWebpack: config => {
+    // 配置sourcemap
+    if (debug) {
+      config.devtool = "eval-source-map";
+    }
+  },
   chainWebpack: config => {
     config.module
       .rule("svg")
