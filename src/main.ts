@@ -15,7 +15,8 @@ import {
   TableColumn,
   Pagination,
   Select,
-  Option
+  Option,
+  Alert
 } from "element-ui";
 import "./utils/svg-icon.ts";
 [
@@ -31,7 +32,8 @@ import "./utils/svg-icon.ts";
   TableColumn,
   Pagination,
   Select,
-  Option
+  Option,
+  Alert
 ].forEach(item => {
   Vue.use(item);
 });
