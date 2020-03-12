@@ -13,7 +13,9 @@
       <el-button type="primary">搜索</el-button>
     </div>
     <div class="course-table-wrap">
-      <el-button type="primary" size="mini" icon="el-icon-plus">新增</el-button>
+      <el-button type="primary" size="mini" icon="el-icon-plus" @click="addItem"
+        >新增</el-button
+      >
       <el-table border>
         <el-table-column align="center" label="课程名称"></el-table-column>
         <el-table-column align="center" label="一级分类"></el-table-column>
@@ -71,6 +73,9 @@ export default class CourseManage extends Vue {
   }
   deleteItem(): void {
     console.log("删除");
+  }
+  addItem(): void {
+    this.$router.push({ path: "newCourse" });
   }
 }
 </script>
