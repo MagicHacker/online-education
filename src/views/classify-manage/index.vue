@@ -16,7 +16,9 @@
       :closable="false"
     ></el-alert>
     <div class="classify-table-wrap">
-      <el-button type="primary" size="mini" icon="el-icon-plus">新增</el-button>
+      <el-button type="primary" size="mini" icon="el-icon-plus" @click="addItem"
+        >新增</el-button
+      >
       <el-table border>
         <el-table-column align="center" label="分类名称"></el-table-column>
         <el-table-column align="center" label="分类排序"></el-table-column>
@@ -52,6 +54,9 @@ export default class ClassifyManage extends Vue {
   }
   delItem(): void {
     console.log("删除");
+  }
+  addItem(): void {
+    this.$router.push({ path: "addClassify" });
   }
 }
 </script>
