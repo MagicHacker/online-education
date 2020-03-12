@@ -16,7 +16,11 @@ import {
   Pagination,
   Select,
   Option,
-  Alert
+  Alert,
+  Form,
+  FormItem,
+  Upload,
+  Dialog
 } from "element-ui";
 import "./utils/svg-icon.ts";
 [
@@ -33,7 +37,11 @@ import "./utils/svg-icon.ts";
   Pagination,
   Select,
   Option,
-  Alert
+  Alert,
+  Form,
+  FormItem,
+  Upload,
+  Dialog
 ].forEach(item => {
   Vue.use(item);
 });
