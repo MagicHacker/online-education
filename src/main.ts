@@ -20,7 +20,8 @@ import {
   Form,
   FormItem,
   Upload,
-  Dialog
+  Dialog,
+  Radio
 } from "element-ui";
 import "./utils/svg-icon.ts";
 [
@@ -41,7 +42,8 @@ import "./utils/svg-icon.ts";
   Form,
   FormItem,
   Upload,
-  Dialog
+  Dialog,
+  Radio
 ].forEach(item => {
   Vue.use(item);
 });
