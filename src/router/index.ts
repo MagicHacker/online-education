@@ -11,6 +11,8 @@ import OrderManage from "../views/order-manage/index.vue";
 import DocManage from "../views/doc-manage/index.vue";
 import SalaryManage from "../views/salary-manage/index.vue";
 import AddClassify from "../views/classify-manage/add-classify.vue";
+import CourseCatalog from "../views/course-manage/course-catalog.vue";
+import NewCourse from "../views/course-manage/new-course.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -48,6 +50,16 @@ const routes = [
         path: "courseManage",
         name: "courseManage",
         component: CourseManage
+      },
+      {
+        path: "courseCatalog",
+        name: "courseCatalog",
+        component: CourseCatalog
+      },
+      {
+        path: "newCourse",
+        name: "newCourse",
+        component: NewCourse
       },
       {
         path: "orderManage",
