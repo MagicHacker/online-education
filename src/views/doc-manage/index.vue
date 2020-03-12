@@ -10,7 +10,9 @@
       <el-button type="primary">搜索</el-button>
     </div>
     <div class="document-table-wrap">
-      <el-button type="primary" size="mini" icon="el-icon-plus">新增</el-button>
+      <el-button type="primary" size="mini" icon="el-icon-plus" @click="addItem"
+        >新增</el-button
+      >
       <el-table border>
         <el-table-column align="center" label="文档名称"></el-table-column>
         <el-table-column align="center" label="上传时间"></el-table-column>
@@ -24,6 +26,18 @@
       </el-table>
     </div>
     <pagination-view></pagination-view>
+    <el-dialog :visible.sync="dialogVisible" title="上传文档" center>
+      <el-upload action="https://jsonplaceholder.typicode.com/posts/" multiple>
+        <el-button type="primary" size="mini">点击上传</el-button>
+        <div slot="tip">
+          支持扩展名：txt、doc、docx、xls、xlsx、pdf、ppt、pptx
+        </div>
+      </el-upload>
+      <span slot="footer">
+        <el-button type="primary">保存</el-button>
+        <el-button type="info">取消</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script lang="ts">
@@ -37,8 +51,12 @@ import PaginationView from "../../components/pagination-view/index.vue";
 export default class DocManage extends Vue {
   docName = "";
   uploadTime = "";
+  dialogVisible = false;
   deleteDoc(): void {
     console.log("删除");
+  }
+  addItem(): void {
+    this.dialogVisible = true;
   }
 }
 </script>
