@@ -19,7 +19,7 @@
         <el-table-column align="center" label="教师姓名"></el-table-column>
         <el-table-column align="center" label="年级"></el-table-column>
         <el-table-column align="center" label="价格"></el-table-column>
-        <el-table-column align="center" label="课时"></el-table-column>
+        <el-table-column align="center" label="课时单位"></el-table-column>
         <el-table-column align="center" label="展示状态"></el-table-column>
         <el-table-column align="center" label="课程状态"></el-table-column>
         <el-table-column align="center" label="课程目录"></el-table-column>
