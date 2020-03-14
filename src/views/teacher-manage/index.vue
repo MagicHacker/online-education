@@ -16,12 +16,13 @@
         <el-table-column label="编号" align="center"></el-table-column>
         <el-table-column label="手机号" align="center"></el-table-column>
         <el-table-column label="姓名" align="center"></el-table-column>
+        <el-table-column label="头像" align="center"></el-table-column>
         <el-table-column label="年级" align="center"></el-table-column>
         <el-table-column label="科目" align="center"></el-table-column>
         <el-table-column label="简介" align="center"></el-table-column>
         <el-table-column label="佣金比例" align="center"></el-table-column>
         <el-table-column label="收入" align="center"></el-table-column>
-        <el-table-column label="已体现" align="center"></el-table-column>
+        <el-table-column label="已提现" align="center"></el-table-column>
         <el-table-column label="学生数" align="center"></el-table-column>
         <el-table-column label="课程数" align="center"></el-table-column>
         <el-table-column label="注册时间" align="center"></el-table-column>
