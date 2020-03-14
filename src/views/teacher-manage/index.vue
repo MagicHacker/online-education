@@ -7,15 +7,13 @@
         <el-option label="启用" value="0"></el-option>
         <el-option label="停用" value="1"></el-option>
       </el-select>
-      <el-date-picker v-model="startTime" type="datetime" placeholder="开始时间"></el-date-picker>
-      <el-date-picker v-model="endTime" type="datetime" placeholder="结束时间"></el-date-picker>
+      <el-date-picker v-model="registerTime" type="datetime" placeholder="注册时间"></el-date-picker>
       <el-button type="primary">搜索</el-button>
     </div>
     <div class="teacher-table-wrap">
       <el-button type="primary" icon="el-icon-plus">新增</el-button>
       <el-table border>
         <el-table-column label="编号" align="center"></el-table-column>
-        <el-table-column label="头像" align="center"></el-table-column>
         <el-table-column label="手机号" align="center"></el-table-column>
         <el-table-column label="姓名" align="center"></el-table-column>
         <el-table-column label="年级" align="center"></el-table-column>
@@ -26,12 +24,12 @@
         <el-table-column label="已体现" align="center"></el-table-column>
         <el-table-column label="学生数" align="center"></el-table-column>
         <el-table-column label="课程数" align="center"></el-table-column>
-        <el-table-column label="创建时间" align="center"></el-table-column>
+        <el-table-column label="注册时间" align="center"></el-table-column>
         <el-table-column label="状态" align="center"></el-table-column>
         <el-table-column label="操作" align="center">
           <template slot-scope="scope">
             <el-button size="mini" @click="editItem(scope.row)">编辑</el-button>
-            <el-button size="mini" @click="delItem(scope.row)">删除</el-button>
+            <el-button size="mini" @click="delItem(scope.row)">停用</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -51,8 +49,7 @@ export default class TeacherManage extends Vue {
   teacherName = "";
   phoneNumber = "";
   teacherStatus = "";
-  startTime = "";
-  endTime = "";
+  registerTime = "";
   editItem(): void {
     console.log("编辑");
   }
