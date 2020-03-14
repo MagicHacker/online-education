@@ -3,16 +3,7 @@
     <div class="student-search-wrap">
       <el-input v-model="studentName" placeholder="姓名"></el-input>
       <el-input v-model="phoneNumber" placeholder="手机号"></el-input>
-      <el-date-picker
-        v-model="startTime"
-        type="datetime"
-        placeholder="开始时间"
-      ></el-date-picker>
-      <el-date-picker
-        v-model="endTime"
-        type="datetime"
-        placeholder="结束时间"
-      ></el-date-picker>
+      <el-date-picker v-model="registerTime" type="datetime" placeholder="注册时间"></el-date-picker>
       <el-button type="primary">搜索</el-button>
     </div>
     <el-table border>
@@ -35,8 +26,7 @@ import PaginationView from "../../components/pagination-view/index.vue";
 export default class StudentManage extends Vue {
   studentName = "";
   phoneNumber = "";
-  startTime = "";
-  endTime = "";
+  registerTime = "";
 }
 </script>
 <style lang="less" scoped>
