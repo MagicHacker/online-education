@@ -1,23 +1,9 @@
 <template>
   <div class="salary-page-wrap">
     <div class="salary-search-wrap">
-      <el-input
-        v-model="salaryName"
-        :clearable="true"
-        placeholder="老师姓名"
-      ></el-input>
-      <el-input
-        v-model="operateType"
-        :clearable="true"
-        placeholder="处理类型"
-      ></el-input>
-      <el-date-picker
-        v-model="dateTime"
-        type="datetimerange"
-        range-separator="至"
-        start-placeholder="开始日期"
-        end-placeholder="结束日期"
-      ></el-date-picker>
+      <el-input v-model="salaryName" :clearable="true" placeholder="老师姓名"></el-input>
+      <el-input v-model="operateType" :clearable="true" placeholder="处理类型"></el-input>
+      <el-date-picker v-model="dateTime" type="datetime" placeholder="申请时间"></el-date-picker>
       <el-button type="primary">搜索</el-button>
     </div>
     <el-table border>
