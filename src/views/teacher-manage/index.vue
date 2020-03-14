@@ -1,22 +1,14 @@
 <template>
   <div class="teacher-page-wrap">
     <div class="teacher-search-wrap">
-      <el-input v-model="teacherName" placeholder="老师姓名"></el-input>
+      <el-input v-model="teacherName" placeholder="教师姓名"></el-input>
       <el-input v-model="phoneNumber" placeholder="手机号"></el-input>
       <el-select v-model="teacherStatus" placeholder="状态" clearable>
         <el-option label="启用" value="0"></el-option>
         <el-option label="停用" value="1"></el-option>
       </el-select>
-      <el-date-picker
-        v-model="startTime"
-        type="datetime"
-        placeholder="开始时间"
-      ></el-date-picker>
-      <el-date-picker
-        v-model="endTime"
-        type="datetime"
-        placeholder="结束时间"
-      ></el-date-picker>
+      <el-date-picker v-model="startTime" type="datetime" placeholder="开始时间"></el-date-picker>
+      <el-date-picker v-model="endTime" type="datetime" placeholder="结束时间"></el-date-picker>
       <el-button type="primary">搜索</el-button>
     </div>
     <div class="teacher-table-wrap">

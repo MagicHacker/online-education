@@ -2,27 +2,21 @@
   <div class="course-page-wrap">
     <div class="course-search-wrap">
       <el-input v-model="courseName" placeholder="课程名称"></el-input>
-      <el-input v-model="teacherName" placeholder="老师姓名"></el-input>
+      <el-input v-model="teacherName" placeholder="教师姓名"></el-input>
       <el-input v-model="oneLevel" placeholder="一级分类"></el-input>
       <el-input v-model="twoLevel" placeholder="二级分类"></el-input>
-      <el-date-picker
-        type="datetime"
-        v-model="createTime"
-        placeholder="创建时间"
-      ></el-date-picker>
+      <el-date-picker type="datetime" v-model="createTime" placeholder="创建时间"></el-date-picker>
       <el-button type="primary">搜索</el-button>
     </div>
     <div class="course-table-wrap">
-      <el-button type="primary" size="mini" icon="el-icon-plus" @click="addItem"
-        >新增</el-button
-      >
+      <el-button type="primary" size="mini" icon="el-icon-plus" @click="addItem">新增</el-button>
       <el-table border>
         <el-table-column align="center" label="课程名称"></el-table-column>
         <el-table-column align="center" label="一级分类"></el-table-column>
         <el-table-column align="center" label="二级分类"></el-table-column>
         <el-table-column align="center" label="预览图"></el-table-column>
         <el-table-column align="center" label="Banner"></el-table-column>
-        <el-table-column align="center" label="老师"></el-table-column>
+        <el-table-column align="center" label="教师姓名"></el-table-column>
         <el-table-column align="center" label="年级"></el-table-column>
         <el-table-column align="center" label="价格"></el-table-column>
         <el-table-column align="center" label="课时"></el-table-column>
@@ -32,18 +26,9 @@
         <el-table-column align="center" label="创建时间"></el-table-column>
         <el-table-column align="center" label="操作">
           <template slot-scope="scope">
-            <el-button size="mini" type="primary" @click="editItem(scope.row)"
-              >编辑</el-button
-            >
-            <el-button
-              size="mini"
-              type="success"
-              @click="changeStatus(scope.row)"
-              >上架</el-button
-            >
-            <el-button size="mini" type="danger" @click="deleteItem(scope.row)"
-              >删除</el-button
-            >
+            <el-button size="mini" type="primary" @click="editItem(scope.row)">编辑</el-button>
+            <el-button size="mini" type="success" @click="changeStatus(scope.row)">上架</el-button>
+            <el-button size="mini" type="danger" @click="deleteItem(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
