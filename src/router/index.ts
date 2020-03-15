@@ -13,6 +13,7 @@ import SalaryManage from "../views/salary-manage/index.vue";
 import AddClassify from "../views/classify-manage/add-classify.vue";
 import CourseCatalog from "../views/course-manage/course-catalog.vue";
 import NewCourse from "../views/course-manage/new-course.vue";
+import EditTeacher from "../views/teacher-manage/edit-teacher.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -35,6 +36,11 @@ const routes = [
         path: "teacherManage",
         name: "teacherManage",
         component: TeacherManage
+      },
+      {
+        path: "editTeacher",
+        name: "editTeacher",
+        component: EditTeacher
       },
       {
         path: "studentManage",
