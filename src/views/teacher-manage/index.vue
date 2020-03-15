@@ -11,9 +11,8 @@
       <el-button type="primary">搜索</el-button>
     </div>
     <div class="teacher-table-wrap">
-      <el-button type="primary" icon="el-icon-plus">新增</el-button>
+      <el-button type="primary" icon="el-icon-plus" @click="addItem">新增</el-button>
       <el-table border>
-        <el-table-column label="编号" align="center"></el-table-column>
         <el-table-column label="手机号" align="center"></el-table-column>
         <el-table-column label="姓名" align="center"></el-table-column>
         <el-table-column label="头像" align="center"></el-table-column>
@@ -56,6 +55,9 @@ export default class TeacherManage extends Vue {
   }
   delItem(): void {
     console.log("删除");
+  }
+  addItem(): void {
+    this.$router.push({ path: "editTeacher" });
   }
 }
 </script>
