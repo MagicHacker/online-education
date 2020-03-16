@@ -15,7 +15,6 @@
       <el-table border>
         <el-table-column label="手机号" align="center"></el-table-column>
         <el-table-column label="姓名" align="center"></el-table-column>
-        <el-table-column label="头像" align="center"></el-table-column>
         <el-table-column label="年级" align="center"></el-table-column>
         <el-table-column label="科目" align="center"></el-table-column>
         <el-table-column label="简介" align="center"></el-table-column>
