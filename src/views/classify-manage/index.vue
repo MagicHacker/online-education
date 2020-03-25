@@ -1,13 +1,18 @@
 <template>
   <div class="classify-page-wrap">
     <div class="classify-search-wrap">
-      <el-input v-model="classifyName" placeholder="分类名称"></el-input>
+      <el-input
+        v-model="classifyName"
+        placeholder="分类名称"
+        clearable
+      ></el-input>
       <el-date-picker
         type="datetime"
         placeholder="添加时间"
         v-model="addTime"
+        clearable
       ></el-date-picker>
-      <el-button type="primary">搜索</el-button>
+      <el-button type="primary" @click="searchCategory">搜索</el-button>
     </div>
     <el-alert
       type="info"
@@ -19,10 +24,22 @@
       <el-button type="primary" size="mini" icon="el-icon-plus" @click="addItem"
         >新增</el-button
       >
-      <el-table border>
-        <el-table-column align="center" label="分类名称"></el-table-column>
-        <el-table-column align="center" label="分类排序"></el-table-column>
-        <el-table-column align="center" label="添加时间"></el-table-column>
+      <el-table border :data="tableData">
+        <el-table-column
+          align="center"
+          label="分类名称"
+          prop="cate_name"
+        ></el-table-column>
+        <el-table-column
+          align="center"
+          label="分类排序"
+          prop="cate_sort"
+        ></el-table-column>
+        <el-table-column
+          align="center"
+          label="添加时间"
+          prop="create_time"
+        ></el-table-column>
         <el-table-column align="center" label="操作">
           <template slot-scope="scope">
             <el-button type="primary" size="mini" @click="editItem(scope.row)"
@@ -39,24 +56,35 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import PaginationView from "../../components/pagination-view/index.vue";
+import { Component, Vue } from 'vue-property-decorator'
+import PaginationView from '../../components/pagination-view/index.vue'
+import Axios from 'axios'
 @Component({
   components: {
     PaginationView
   }
 })
 export default class ClassifyManage extends Vue {
-  classifyName = "";
-  addTime = "";
+  classifyName = ''
+  addTime = ''
+  tableData = []
+  mounted(): void {
+    this.searchCategory()
+  }
+  // 搜索功能
+  searchCategory(): void {
+    this.axios.get('http://localhost:3000/class/getClass').then(res => {
+      this.tableData = res.data.result
+    })
+  }
   editItem(): void {
-    console.log("编辑");
+    console.log('编辑')
   }
   delItem(): void {
-    console.log("删除");
+    console.log('删除')
   }
   addItem(): void {
-    this.$router.push({ path: "addClassify" });
+    this.$router.push({ path: 'addClassify' })
   }
 }
 </script>

@@ -1,7 +1,9 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './store'
+import Axios from 'axios'
+import VueAxios from 'vue-axios'
 import {
   Button,
   Input,
@@ -22,9 +24,9 @@ import {
   Upload,
   Dialog,
   Radio
-} from "element-ui";
-import "./utils/svg-icon.ts";
-[
+} from 'element-ui'
+import './utils/svg-icon.ts'
+;[
   Button,
   Input,
   Menu,
@@ -45,12 +47,13 @@ import "./utils/svg-icon.ts";
   Dialog,
   Radio
 ].forEach(item => {
-  Vue.use(item);
-});
-Vue.config.productionTip = false;
-
+  Vue.use(item)
+})
+Vue.use(VueAxios, Axios)
+Vue.config.productionTip = false
+// 全局引入axios
 new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount("#app");
+}).$mount('#app')
