@@ -2,7 +2,10 @@
   <div class="edit-teacher-wrap">
     <el-form label-width="80px" :model="formData">
       <el-form-item label="账号">
-        <el-input v-model="formData.phoneNumber" placeholder="手机号"></el-input>
+        <el-input
+          v-model="formData.phoneNumber"
+          placeholder="手机号"
+        ></el-input>
       </el-form-item>
       <el-form-item label="年级">
         <el-input v-model="formData.grade" placeholder="年级"></el-input>
@@ -16,7 +19,11 @@
         </el-input>
       </el-form-item>
       <el-form-item label="简介">
-        <el-input type="area" v-model="formData.brief" placeholder="教师简介，最多150字"></el-input>
+        <el-input
+          type="area"
+          v-model="formData.brief"
+          placeholder="教师简介，最多150字"
+        ></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary">提交</el-button>

@@ -3,7 +3,11 @@
     <div class="student-search-wrap">
       <el-input v-model="studentName" placeholder="姓名"></el-input>
       <el-input v-model="phoneNumber" placeholder="手机号"></el-input>
-      <el-date-picker v-model="registerTime" type="datetime" placeholder="注册时间"></el-date-picker>
+      <el-date-picker
+        v-model="registerTime"
+        type="datetime"
+        placeholder="注册时间"
+      ></el-date-picker>
       <el-button type="primary">搜索</el-button>
     </div>
     <el-table border>

@@ -12,16 +12,16 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop } from "vue-property-decorator";
 @Component
 export default class PaginationView extends Vue {
-  currentPage = 1
-  @Prop() total
+  currentPage = 1;
+  @Prop() total;
   changePageSize(val: number): void {
-    this.$emit('changeSize', val)
+    this.$emit("changeSize", val);
   }
   changeCurrent(val: number): void {
-    this.$emit('changeCurrent', val)
+    this.$emit("changeCurrent", val);
   }
 }
 </script>

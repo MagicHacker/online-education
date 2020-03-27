@@ -7,11 +7,17 @@
         <el-option label="启用" value="0"></el-option>
         <el-option label="停用" value="1"></el-option>
       </el-select>
-      <el-date-picker v-model="registerTime" type="datetime" placeholder="注册时间"></el-date-picker>
+      <el-date-picker
+        v-model="registerTime"
+        type="datetime"
+        placeholder="注册时间"
+      ></el-date-picker>
       <el-button type="primary">搜索</el-button>
     </div>
     <div class="teacher-table-wrap">
-      <el-button type="primary" icon="el-icon-plus" @click="addItem">新增</el-button>
+      <el-button type="primary" icon="el-icon-plus" @click="addItem"
+        >新增</el-button
+      >
       <el-table border>
         <el-table-column label="手机号" align="center"></el-table-column>
         <el-table-column label="姓名" align="center"></el-table-column>

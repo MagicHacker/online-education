@@ -2,7 +2,10 @@
   <div class="new-course-wrap">
     <el-form label-width="80px" :model="formData">
       <el-form-item label="课程名称">
-        <el-input v-model="formData.courseName" placeholder="课程名称"></el-input>
+        <el-input
+          v-model="formData.courseName"
+          placeholder="课程名称"
+        ></el-input>
       </el-form-item>
       <el-form-item label="一级分类">
         <el-select v-model="formData.oneLevel" placeholder="一级分类">
@@ -44,7 +47,11 @@
         <el-radio label="按月" v-model="formData.unit"></el-radio>
       </el-form-item>
       <el-form-item label="课程详情">
-        <el-input type="textarea" placeholder="课程详情" v-model="formData.detail"></el-input>
+        <el-input
+          type="textarea"
+          placeholder="课程详情"
+          v-model="formData.detail"
+        ></el-input>
       </el-form-item>
       <el-form-item label="课程目录">
         <div class="course-catalog-header">
@@ -74,7 +81,11 @@
           <div>
             <span>等待直播</span>
           </div>
-          <el-button type="danger" size="mini" icon="el-icon-remove"></el-button>
+          <el-button
+            type="danger"
+            size="mini"
+            icon="el-icon-remove"
+          ></el-button>
         </div>
       </el-form-item>
       <el-form-item>
@@ -84,7 +95,10 @@
     </el-form>
     <el-dialog width="30%" :visible.sync="dialogVisible" center>
       <el-input v-model="catalogName" placeholder="目录名称"></el-input>
-      <el-date-picker v-model="liveTime" placeholder="直播时间"></el-date-picker>
+      <el-date-picker
+        v-model="liveTime"
+        placeholder="直播时间"
+      ></el-date-picker>
       <span slot="footer">
         <el-button type="primary">确定</el-button>
         <el-button type="info">取消</el-button>
