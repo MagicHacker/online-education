@@ -7,10 +7,11 @@
         clearable
       ></el-input>
       <el-date-picker
-        type="datetime"
+        type="date"
         placeholder="添加时间"
         v-model="addTime"
         clearable
+        value-format="yyyy-MM-dd"
       ></el-date-picker>
       <el-button type="primary" @click="searchCategory">搜索</el-button>
     </div>
@@ -52,39 +53,99 @@
         </el-table-column>
       </el-table>
     </div>
-    <pagination-view></pagination-view>
+    <pagination-view
+      :total="total"
+      @changeSize="changePageSize"
+      @changeCurrent="changeCurrentPage"
+    ></pagination-view>
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import PaginationView from '../../components/pagination-view/index.vue'
-import Axios from 'axios'
+import { Component, Vue } from "vue-property-decorator";
+import PaginationView from "../../components/pagination-view/index.vue";
 @Component({
   components: {
     PaginationView
   }
 })
 export default class ClassifyManage extends Vue {
-  classifyName = ''
-  addTime = ''
-  tableData = []
+  classifyName = "";
+  addTime = "";
+  tableData = [];
+  total = 0;
+  pageNum = 1;
+  pageSize = 10;
   mounted(): void {
-    this.searchCategory()
+    this.searchCategory();
+  }
+  // 改变每页条数
+  changePageSize(val: number): void {
+    this.pageSize = val;
+    this.queryData();
+  }
+  // 改变当前页数
+  changeCurrentPage(val: number): void {
+    this.pageNum = val;
+    this.queryData();
+  }
+  // 查询数据
+  queryData(): void {
+    this.axios
+      .get("http://localhost:3000/class/getClass", {
+        params: {
+          className: this.classifyName,
+          createTime: this.addTime,
+          pageNum: this.pageNum,
+          pageSize: this.pageSize
+        }
+      })
+      .then(res => {
+        const { result, total } = res.data;
+        this.tableData = result;
+        this.total = total;
+      });
   }
   // 搜索功能
   searchCategory(): void {
-    this.axios.get('http://localhost:3000/class/getClass').then(res => {
-      this.tableData = res.data.result
+    this.queryData();
+  }
+  editItem(row): void {
+    this.$router.push({ name: "addClassify", params: { cateId: row.cate_id } });
+  }
+  delItem(row): void {
+    const cateId = row.cate_id;
+    // 判断的提示
+    this.$confirm("是否删除", {
+      confirmButtonText: "确定",
+      cancelButtonText: "取消"
     })
-  }
-  editItem(): void {
-    console.log('编辑')
-  }
-  delItem(): void {
-    console.log('删除')
+      .then(() => {
+        this.axios
+          .delete("http://localhost:3000/class/deleteClass", {
+            params: {
+              classId: cateId
+            }
+          })
+          .then(res => {
+            const { code } = res.data;
+            if (code === 0) {
+              this.$message({
+                type: "success",
+                message: "删除成功"
+              });
+              this.queryData();
+            }
+          });
+      })
+      .catch(() => {
+        this.$message({
+          type: "info",
+          message: "取消删除"
+        });
+      });
   }
   addItem(): void {
-    this.$router.push({ path: 'addClassify' })
+    this.$router.push({ path: "addClassify" });
   }
 }
 </script>
