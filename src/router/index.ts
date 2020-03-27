@@ -85,7 +85,8 @@ const routes = [
       {
         path: "addClassify",
         name: "addClassify",
-        component: AddClassify
+        component: AddClassify,
+        props: true
       }
     ]
   },
