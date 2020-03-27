@@ -29,7 +29,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Prop } from "vue-property-decorator";
 interface FormData {
   name: string;
   type: string;
@@ -37,15 +37,68 @@ interface FormData {
 }
 @Component
 export default class AddClassify extends Vue {
+  @Prop() cateId!: string;
   formData: FormData = {
     name: "",
     type: "",
     order: ""
   };
+  mounted(): void {
+    this.axios
+      .get("http://localhost:3000/class/getClass", {
+        params: {
+          classId: this.cateId
+        }
+      })
+      .then(res => {
+        const { result } = res.data;
+        this.formData.name = result[0].cate_name;
+        this.formData.order = result[0].cate_sort;
+      });
+  }
   submit(): void {
-    this.$router.replace({ path: "classifyManage" });
+    if (this.cateId) {
+      // 修改分类
+      this.axios
+        .post("http://localhost:3000/class/updateClass", {
+          classId: this.cateId,
+          className: this.formData.name,
+          classSort: this.formData.order
+        })
+        .then(res => {
+          const { code } = res.data;
+          if (code === 0) {
+            this.$message({
+              type: "success",
+              message: "修改成功"
+            });
+            this.$router.replace({ path: "classifyManage" });
+          }
+        });
+    } else {
+      // 添加分类
+      this.axios
+        .post("http://localhost:3000/class/addClass", {
+          className: this.formData.name,
+          classSort: this.formData.order
+        })
+        .then(res => {
+          const { code } = res.data;
+          if (code === 0) {
+            this.$message({
+              type: "success",
+              message: "添加成功"
+            });
+            this.$router.replace({ path: "classifyManage" });
+          }
+        });
+    }
   }
   cancel(): void {
+    this.$message({
+      type: "info",
+      message: "取消修改"
+    });
     this.$router.replace({ path: "classifyManage" });
   }
 }
