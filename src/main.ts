@@ -23,7 +23,9 @@ import {
   FormItem,
   Upload,
   Dialog,
-  Radio
+  Radio,
+  Message,
+  MessageBox
 } from 'element-ui'
 import './utils/svg-icon.ts'
 ;[
@@ -49,6 +51,8 @@ import './utils/svg-icon.ts'
 ].forEach(item => {
   Vue.use(item)
 })
+Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$message = Message
 Vue.use(VueAxios, Axios)
 Vue.config.productionTip = false
 // 全局引入axios
