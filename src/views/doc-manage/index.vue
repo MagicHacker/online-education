@@ -1,21 +1,31 @@
 <template>
   <div class="document-page-wrap">
     <div class="document-search-wrap">
-      <el-input v-model="docName" placeholder="文档名称"></el-input>
+      <el-input v-model="docName" placeholder="文档名称" clearable></el-input>
       <el-date-picker
-        type="datetime"
+        type="date"
         v-model="uploadTime"
         placeholder="上传时间"
+        clearable
+        value-format="yyyy-MM-dd"
       ></el-date-picker>
-      <el-button type="primary">搜索</el-button>
+      <el-button type="primary" @click="search()">搜索</el-button>
     </div>
     <div class="document-table-wrap">
       <el-button type="primary" size="mini" icon="el-icon-plus" @click="addItem"
         >新增</el-button
       >
-      <el-table border>
-        <el-table-column align="center" label="文档名称"></el-table-column>
-        <el-table-column align="center" label="上传时间"></el-table-column>
+      <el-table border :data="tableData">
+        <el-table-column
+          align="center"
+          label="文档名称"
+          prop="doc_name"
+        ></el-table-column>
+        <el-table-column
+          align="center"
+          label="上传时间"
+          prop="upload_time"
+        ></el-table-column>
         <el-table-column align="center" label="操作">
           <template slot-scope="scope">
             <el-button size="mini" type="danger" @click="deleteDoc(scope.row)"
@@ -25,7 +35,11 @@
         </el-table-column>
       </el-table>
     </div>
-    <pagination-view></pagination-view>
+    <pagination-view
+      :total="total"
+      @changeSize="changePageSize"
+      @changeCurrent="changeCurrentPage"
+    ></pagination-view>
     <el-dialog :visible.sync="dialogVisible" title="上传文档" center>
       <el-upload action="https://jsonplaceholder.typicode.com/posts/" multiple>
         <el-button type="primary" size="mini">点击上传</el-button>
@@ -52,8 +66,70 @@ export default class DocManage extends Vue {
   docName = "";
   uploadTime = "";
   dialogVisible = false;
-  deleteDoc(): void {
-    console.log("删除");
+  pageNum = 1;
+  pageSize = 10;
+  total = 0;
+  tableData = [];
+  mounted(): void {
+    this.queryData();
+  }
+  // 搜索
+  search(): void {
+    this.queryData();
+  }
+  // 查询数据
+  queryData(): void {
+    this.axios("http://localhost:3000/doc/getDocs", {
+      params: {
+        docName: this.docName,
+        uploadTime: this.uploadTime,
+        pageNum: this.pageNum,
+        pageSize: this.pageSize
+      }
+    }).then(res => {
+      const { result, total } = res.data;
+      this.tableData = result;
+      this.total = total;
+    });
+  }
+  changePageSize(val: number): void {
+    this.pageSize = val;
+    this.queryData();
+  }
+  changeCurrentPage(val: number): void {
+    this.pageNum = val;
+    this.queryData();
+  }
+  deleteDoc(row): void {
+    const docId = row.doc_id;
+    this.$confirm("是否删除?", {
+      confirmButtonText: "确定",
+      cancelButtonText: "取消"
+    })
+      .then(() => {
+        this.axios
+          .delete("http://localhost:3000/doc/deleteDoc", {
+            params: {
+              docId
+            }
+          })
+          .then(res => {
+            const { code } = res.data;
+            if (code === 0) {
+              this.$message({
+                type: "success",
+                message: "删除成功"
+              });
+              this.queryData();
+            }
+          });
+      })
+      .catch(() => {
+        this.$message({
+          type: "info",
+          message: "取消删除"
+        });
+      });
   }
   addItem(): void {
     this.dialogVisible = true;
