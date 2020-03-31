@@ -1,7 +1,11 @@
 <template>
   <div class="salary-page-wrap">
     <div class="salary-search-wrap">
-      <el-input v-model="teacherName" clearable placeholder="教师姓名"></el-input>
+      <el-input
+        v-model="teacherName"
+        clearable
+        placeholder="教师姓名"
+      ></el-input>
       <el-input v-model="dealType" clearable placeholder="处理类型"></el-input>
       <el-date-picker
         v-model="dateTime"
@@ -13,15 +17,47 @@
       <el-button type="primary" @click="search">搜索</el-button>
     </div>
     <el-table border :data="tableData">
-      <el-table-column label="教师编号" align="center" prop="teacher_id"></el-table-column>
-      <el-table-column label="教师姓名" align="center" prop="name"></el-table-column>
-      <el-table-column label="处理类型" align="center" prop="sal_type"></el-table-column>
-      <el-table-column label="提现金额" align="center" prop="sal_deal"></el-table-column>
-      <el-table-column label="申请时间" align="center" prop="deal_time"></el-table-column>
-      <el-table-column label="处理前金额" align="center" prop="sal_sum"></el-table-column>
-      <el-table-column label="处理后金额" align="center" prop="sal_after"></el-table-column>
+      <el-table-column
+        label="教师编号"
+        align="center"
+        prop="teacher_id"
+      ></el-table-column>
+      <el-table-column
+        label="教师姓名"
+        align="center"
+        prop="name"
+      ></el-table-column>
+      <el-table-column
+        label="处理类型"
+        align="center"
+        prop="sal_type"
+      ></el-table-column>
+      <el-table-column
+        label="提现金额"
+        align="center"
+        prop="sal_deal"
+      ></el-table-column>
+      <el-table-column
+        label="申请时间"
+        align="center"
+        prop="deal_time"
+      ></el-table-column>
+      <el-table-column
+        label="处理前金额"
+        align="center"
+        prop="sal_sum"
+      ></el-table-column>
+      <el-table-column
+        label="处理后金额"
+        align="center"
+        prop="sal_after"
+      ></el-table-column>
     </el-table>
-    <pagination-view :total="total" @changeSize="changePageSize" @changeCurrent="changeCurrentPage"></pagination-view>
+    <pagination-view
+      :total="total"
+      @changeSize="changePageSize"
+      @changeCurrent="changeCurrentPage"
+    ></pagination-view>
   </div>
 </template>
 <script lang="ts">
