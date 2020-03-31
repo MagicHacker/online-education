@@ -88,7 +88,7 @@ export default class MainPage extends Vue {
     justify-content: space-between;
     .main-page-right {
       width: calc(100% - 200px);
-      height: 100%;
+      height: calc(100% - 30px);
       overflow: auto;
     }
   }
