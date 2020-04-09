@@ -5,14 +5,18 @@
       <div class="login-title">
         <span>在线教育管理系统</span>
       </div>
-      <div class="login-form">
-        <el-input placeholder="请输入用户名" v-model="username">
-          <i slot="prefix" class="el-input__icon el-icon-user"></i>
-        </el-input>
-        <el-input placeholder="请输入密码" v-model="password" show-password>
-          <i slot="prefix" class="el-input__icon el-icon-lock"></i>
-        </el-input>
-      </div>
+      <el-form class="login-form" :model="formData" :rules="formRules" ref="loginForm">
+        <el-form-item prop="username">
+          <el-input placeholder="请输入用户名" v-model="formData.username">
+            <i slot="prefix" class="el-input__icon el-icon-user"></i>
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input placeholder="请输入密码" v-model="formData.password" show-password>
+            <i slot="prefix" class="el-input__icon el-icon-lock"></i>
+          </el-input>
+        </el-form-item>
+      </el-form>
       <div class="login-btn">
         <el-button type="primary" @click="loginIn">登录</el-button>
       </div>
@@ -23,10 +27,20 @@
 import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class Login extends Vue {
-  username = "";
-  password = "";
+  formData = {
+    username: "",
+    password: ""
+  };
+  formRules = {
+    username: [{ required: true, message: "用户名不能为空", trigger: "blur" }],
+    password: [{ required: true, message: "密码不能为空", trigger: "blur" }]
+  };
   loginIn(): void {
-    this.$router.push({ path: "/mainPage/homePage" });
+    this.$refs.loginForm.validate(valid => {
+      if (valid) {
+        this.$router.push({ path: "/mainPage/homePage" });
+      }
+    });
   }
 }
 </script>
@@ -68,7 +82,10 @@ export default class Login extends Vue {
       margin-top: 20px;
       /deep/ .el-input {
         width: 300px;
-        margin-bottom: 20px;
+      }
+      /deep/ .el-form-item {
+        width: 300px;
+        margin: 0px auto 20px;
       }
     }
     .login-btn {
