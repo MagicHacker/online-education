@@ -39,7 +39,7 @@ export default class Login extends Vue {
     (this.$refs.loginForm as any).validate(valid => {
       if (valid) {
         // 发请求进行登录
-        this.axios("http://localhost:3000/user/getUser", {
+        this.axios("http://localhost:3000/user/login", {
           params: {
             username: this.formData.username,
             password: this.formData.password
