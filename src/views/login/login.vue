@@ -36,9 +36,29 @@ export default class Login extends Vue {
     password: [{ required: true, message: "密码不能为空", trigger: "blur" }]
   };
   loginIn(): void {
-    this.$refs.loginForm.validate(valid => {
+    (this.$refs.loginForm as any).validate(valid => {
       if (valid) {
-        this.$router.push({ path: "/mainPage/homePage" });
+        // 发请求进行登录
+        this.axios("http://localhost:3000/user/getUser", {
+          params: {
+            username: this.formData.username,
+            password: this.formData.password
+          }
+        }).then(res => {
+          const { result, code } = res.data;
+          if (code === 0) {
+            this.$message({
+              type: "success",
+              message: "登录成功"
+            });
+            this.$router.push({ path: "/mainPage/homePage" });
+          } else {
+            this.$message({
+              type: "error",
+              message: "登录失败，用户名或密码错误"
+            });
+          }
+        });
       }
     });
   }
