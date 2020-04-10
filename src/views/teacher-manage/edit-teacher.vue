@@ -2,10 +2,7 @@
   <div class="edit-teacher-wrap">
     <el-form label-width="80px" :model="formData">
       <el-form-item label="账号">
-        <el-input
-          v-model="formData.phoneNumber"
-          placeholder="手机号"
-        ></el-input>
+        <el-input v-model="formData.phoneNumber" placeholder="手机号"></el-input>
       </el-form-item>
       <el-form-item label="年级">
         <el-input v-model="formData.grade" placeholder="年级"></el-input>
@@ -19,15 +16,11 @@
         </el-input>
       </el-form-item>
       <el-form-item label="简介">
-        <el-input
-          type="area"
-          v-model="formData.brief"
-          placeholder="教师简介，最多150字"
-        ></el-input>
+        <el-input type="area" v-model="formData.brief" placeholder="教师简介，最多150字"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary">提交</el-button>
-        <el-button type="info">取消</el-button>
+        <el-button type="primary" @click="submit">提交</el-button>
+        <el-button type="info" @click="cancel">取消</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -50,6 +43,43 @@ export default class EditTeacher extends Vue {
     commission: 0,
     brief: ""
   };
+  mounted(): void {
+    this.queryData();
+  }
+  queryData(): void {
+    this.axios
+      .get("http://localhost:3000/teacher/getTeachers", {
+        params: {
+          phone: this.$route.params.id,
+          pageNum: 1,
+          pageSize: 1
+        }
+      })
+      .then(res => {
+        const { result, code } = res.data;
+        if (code === 0) {
+          this.formData.phoneNumber = result[0].phone;
+          this.formData.grade = result[0].gride;
+          this.formData.subject = result[0].subject;
+          this.formData.commission = result[0].commission;
+          this.formData.brief = result[0].brief;
+        }
+      });
+  }
+  submit(): void {
+    this.$message({
+      type: "success",
+      message: "提交成功"
+    });
+    this.$router.replace({ name: "teacherManage" });
+  }
+  cancel(): void {
+    this.$message({
+      type: "info",
+      message: "取消提交"
+    });
+    this.$router.replace({ name: "teacherManage" });
+  }
 }
 </script>
 <style lang="less" scoped>
