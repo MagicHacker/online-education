@@ -8,7 +8,7 @@
       <div class="main-page-nav">
         <div>
           <svg-icon iconName="#icon-avatar"></svg-icon>
-          <span>欢迎你，admin</span>
+          <span>欢迎你，{{ username }}</span>
         </div>
         <div @click="exit">
           <svg-icon iconName="#icon-exit"></svg-icon>
@@ -33,6 +33,9 @@ import sideMenu from "../side-menu/index.vue";
   }
 })
 export default class MainPage extends Vue {
+  get username(): string {
+    return this.$store.state.username;
+  }
   exit(): void {
     this.$router.replace({ path: "/login" });
   }
