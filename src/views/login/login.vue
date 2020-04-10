@@ -52,6 +52,7 @@ export default class Login extends Vue {
               message: "登录成功"
             });
             this.$router.push({ path: "/mainPage/homePage" });
+            this.$store.dispatch("getUserInfo", result[0]);
           } else {
             this.$message({
               type: "error",
