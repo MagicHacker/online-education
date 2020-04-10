@@ -1,11 +1,7 @@
 <template>
   <div class="teacher-page-wrap">
     <div class="teacher-search-wrap">
-      <el-input
-        v-model="teacherName"
-        placeholder="教师姓名"
-        clearable
-      ></el-input>
+      <el-input v-model="teacherName" placeholder="教师姓名" clearable></el-input>
       <el-input v-model="phoneNumber" placeholder="手机号" clearable></el-input>
       <el-select v-model="teacherStatus" placeholder="状态" clearable>
         <el-option label="启用" value="0"></el-option>
@@ -21,85 +17,27 @@
       <el-button type="primary" @click="search">搜索</el-button>
     </div>
     <div class="teacher-table-wrap">
-      <el-button type="primary" icon="el-icon-plus" @click="addItem"
-        >新增</el-button
-      >
+      <el-button type="primary" icon="el-icon-plus" @click="addItem">新增</el-button>
       <el-table border :data="tableData">
-        <el-table-column
-          label="手机号"
-          align="center"
-          prop="phone"
-        ></el-table-column>
-        <el-table-column
-          label="姓名"
-          align="center"
-          prop="name"
-          width="80px"
-        ></el-table-column>
-        <el-table-column
-          label="年级"
-          align="center"
-          prop="gride"
-          width="50px"
-        ></el-table-column>
-        <el-table-column
-          label="科目"
-          align="center"
-          prop="subject"
-          width="80px"
-        ></el-table-column>
-        <el-table-column
-          label="佣金比例"
-          align="center"
-          prop="commission"
-          width="80px"
-        ></el-table-column>
-        <el-table-column
-          label="学生数"
-          align="center"
-          prop="stuCount"
-          width="70px"
-        ></el-table-column>
-        <el-table-column
-          label="课程数"
-          align="center"
-          prop="courseCount"
-          width="70px"
-        ></el-table-column>
-        <el-table-column
-          label="状态"
-          align="center"
-          prop="status"
-          width="50px"
-        ></el-table-column>
-        <el-table-column
-          label="注册时间"
-          align="center"
-          prop="rgt_time"
-        ></el-table-column>
-        <el-table-column
-          label="简介"
-          align="center"
-          prop="brief"
-          width="200px"
-        ></el-table-column>
+        <el-table-column label="手机号" align="center" prop="phone"></el-table-column>
+        <el-table-column label="姓名" align="center" prop="name" width="80px"></el-table-column>
+        <el-table-column label="年级" align="center" prop="gride" width="50px"></el-table-column>
+        <el-table-column label="科目" align="center" prop="subject" width="80px"></el-table-column>
+        <el-table-column label="佣金比例" align="center" prop="commission" width="80px"></el-table-column>
+        <el-table-column label="学生数" align="center" prop="stuCount" width="70px"></el-table-column>
+        <el-table-column label="课程数" align="center" prop="courseCount" width="70px"></el-table-column>
+        <el-table-column label="状态" align="center" prop="status" width="50px"></el-table-column>
+        <el-table-column label="注册时间" align="center" prop="rgt_time"></el-table-column>
+        <el-table-column label="简介" align="center" prop="brief" width="200px"></el-table-column>
         <el-table-column label="操作" align="center">
           <template slot-scope="scope">
-            <el-button type="primary" size="mini" @click="editItem(scope.row)"
-              >编辑</el-button
-            >
-            <el-button type="danger" size="mini" @click="delItem(scope.row)"
-              >停用</el-button
-            >
+            <el-button type="primary" size="mini" @click="editItem(scope.row)">编辑</el-button>
+            <el-button type="danger" size="mini" @click="stopItem(scope.row)">停用</el-button>
           </template>
         </el-table-column>
       </el-table>
     </div>
-    <pagination-view
-      :total="total"
-      @changeSize="changePageSize"
-      @changeCurrent="changeCurrentPage"
-    ></pagination-view>
+    <pagination-view :total="total" @changeSize="changePageSize" @changeCurrent="changeCurrentPage"></pagination-view>
   </div>
 </template>
 <script lang="ts">
@@ -153,11 +91,13 @@ export default class TeacherManage extends Vue {
     this.pageNum = val;
     this.queryData();
   }
-  editItem(): void {
-    console.log("编辑");
+  editItem(row): void {
+    const { phone } = row;
+    // 只有命名路由可以使用params参数
+    this.$router.push({ name: "editTeacher", params: { id: phone } });
   }
-  delItem(): void {
-    console.log("删除");
+  stopItem(row): void {
+    const { phone } = row;
   }
   addItem(): void {
     this.$router.push({ path: "editTeacher" });
