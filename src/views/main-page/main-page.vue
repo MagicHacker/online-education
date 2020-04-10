@@ -33,8 +33,10 @@ import sideMenu from "../side-menu/index.vue";
   }
 })
 export default class MainPage extends Vue {
-  get username(): string {
-    return this.$store.state.username;
+  username = "";
+  mounted(): void {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo") as any);
+    this.username = userInfo.username;
   }
   exit(): void {
     this.$router.replace({ path: "/login" });
