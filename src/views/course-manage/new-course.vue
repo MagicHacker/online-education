@@ -2,10 +2,7 @@
   <div class="new-course-wrap">
     <el-form label-width="80px" :model="formData">
       <el-form-item label="课程名称">
-        <el-input
-          v-model="formData.courseName"
-          placeholder="课程名称"
-        ></el-input>
+        <el-input v-model="formData.courseName" placeholder="课程名称"></el-input>
       </el-form-item>
       <el-form-item label="一级分类">
         <el-select v-model="formData.oneLevel" placeholder="一级分类">
@@ -43,15 +40,11 @@
         </el-upload>
       </el-form-item>
       <el-form-item label="课时单位">
-        <el-radio label="按天" v-model="formData.unit"></el-radio>
+        <el-radio label="按年" v-model="formData.unit"></el-radio>
         <el-radio label="按月" v-model="formData.unit"></el-radio>
       </el-form-item>
       <el-form-item label="课程详情">
-        <el-input
-          type="textarea"
-          placeholder="课程详情"
-          v-model="formData.detail"
-        ></el-input>
+        <el-input type="textarea" placeholder="课程详情" v-model="formData.detail"></el-input>
       </el-form-item>
       <el-form-item label="课程目录">
         <div class="course-catalog-header">
@@ -81,26 +74,19 @@
           <div>
             <span>等待直播</span>
           </div>
-          <el-button
-            type="danger"
-            size="mini"
-            icon="el-icon-remove"
-          ></el-button>
+          <el-button type="danger" size="mini" icon="el-icon-remove"></el-button>
         </div>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary">提交</el-button>
-        <el-button type="info">取消</el-button>
+        <el-button type="primary" @click="submit">提交</el-button>
+        <el-button type="info" @click="cancel">取消</el-button>
       </el-form-item>
     </el-form>
     <el-dialog width="30%" :visible.sync="dialogVisible" center>
       <el-input v-model="catalogName" placeholder="目录名称"></el-input>
-      <el-date-picker
-        v-model="liveTime"
-        placeholder="直播时间"
-      ></el-date-picker>
+      <el-date-picker v-model="liveTime" placeholder="直播时间"></el-date-picker>
       <span slot="footer">
-        <el-button type="primary">确定</el-button>
+        <el-button type="primary">提交</el-button>
         <el-button type="info">取消</el-button>
       </span>
     </el-dialog>
@@ -117,6 +103,7 @@ interface FormData {
   teacher: string;
   detail: string;
   grade: string;
+  courseId: string;
 }
 @Component
 export default class NewCourse extends Vue {
@@ -128,11 +115,64 @@ export default class NewCourse extends Vue {
     unit: "按天",
     teacher: "",
     detail: "",
-    grade: ""
+    grade: "",
+    courseId: ""
   };
   catalogName = "";
   dialogVisible = false;
   liveTime = "";
+  mounted(): void {
+    this.queryData();
+  }
+  queryData(): void {
+    this.axios("http://localhost:3000/course/getCourses", {
+      params: {
+        courseId: this.$route.params.courseId,
+        pageNum: 1,
+        pageSize: 10
+      }
+    }).then(res => {
+      const { result, code } = res.data;
+      if (code === 0) {
+        this.formData.courseName = result[0].name;
+        this.formData.oneLevel = result[0].one_level;
+        this.formData.twoLevel = result[0].two_level;
+        this.formData.price = result[0].price;
+        this.formData.unit = result[0].course_unit;
+        this.formData.teacher = result[0].teacherName;
+        this.formData.grade = result[0].grade;
+      }
+    });
+  }
+  submit(): void {
+    this.axios
+      .post("http://localhost:3000/course/updateCourse", {
+        courseName: this.formData.courseName,
+        oneLevel: this.formData.oneLevel,
+        twoLevel: this.formData.twoLevel,
+        grade: this.formData.grade,
+        price: this.formData.price,
+        courseUnit: this.formData.unit,
+        courseId: this.$route.params.courseId
+      })
+      .then(res => {
+        const { code } = res.data;
+        if (code === 0) {
+          this.$message({
+            type: "success",
+            message: "提交成功"
+          });
+          this.$router.replace({ name: "courseManage" });
+        }
+      });
+  }
+  cancel(): void {
+    this.$message({
+      type: "info",
+      message: "取消提交"
+    });
+    this.$router.replace({ name: "courseManage" });
+  }
   addCourseCatalog(): void {
     this.dialogVisible = true;
   }
