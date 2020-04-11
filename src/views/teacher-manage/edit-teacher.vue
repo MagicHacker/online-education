@@ -4,6 +4,9 @@
       <el-form-item label="账号">
         <el-input v-model="formData.phoneNumber" placeholder="手机号"></el-input>
       </el-form-item>
+      <el-form-item label="名字">
+        <el-input v-model="formData.name" placeholder="名字"></el-input>
+      </el-form-item>
       <el-form-item label="年级">
         <el-input v-model="formData.grade" placeholder="年级"></el-input>
       </el-form-item>
@@ -29,6 +32,7 @@
 import { Component, Vue } from "vue-property-decorator";
 interface FormData {
   phoneNumber: string;
+  name: string;
   grade: string;
   subject: string;
   commission: number;
@@ -38,6 +42,7 @@ interface FormData {
 export default class EditTeacher extends Vue {
   formData: FormData = {
     phoneNumber: "",
+    name: "",
     grade: "",
     subject: "",
     commission: 0,
@@ -67,11 +72,25 @@ export default class EditTeacher extends Vue {
       });
   }
   submit(): void {
-    this.$message({
-      type: "success",
-      message: "提交成功"
-    });
-    this.$router.replace({ name: "teacherManage" });
+    this.axios
+      .post("http://localhost:3000/teacher/updateTeacher", {
+        phone: this.formData.phoneNumber,
+        name: this.formData.name,
+        gride: this.formData.grade,
+        subject: this.formData.subject,
+        commission: this.formData.commission,
+        brief: this.formData.brief
+      })
+      .then(res => {
+        const { code } = res.data;
+        if (code === 0) {
+          this.$message({
+            type: "success",
+            message: "提交成功"
+          });
+          this.$router.replace({ name: "teacherManage" });
+        }
+      });
   }
   cancel(): void {
     this.$message({
