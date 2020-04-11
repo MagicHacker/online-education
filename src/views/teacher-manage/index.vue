@@ -26,13 +26,21 @@
         <el-table-column label="佣金比例" align="center" prop="commission" width="80px"></el-table-column>
         <el-table-column label="学生数" align="center" prop="stuCount" width="70px"></el-table-column>
         <el-table-column label="课程数" align="center" prop="courseCount" width="70px"></el-table-column>
-        <el-table-column label="状态" align="center" prop="status" width="50px"></el-table-column>
+        <el-table-column label="状态" align="center" width="50px">
+          <template slot-scope="scope">
+            <span>{{ scope.row.status === 0 ? "停用" : "启用" }}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="注册时间" align="center" prop="rgt_time"></el-table-column>
         <el-table-column label="简介" align="center" prop="brief" width="200px"></el-table-column>
         <el-table-column label="操作" align="center">
           <template slot-scope="scope">
             <el-button type="primary" size="mini" @click="editItem(scope.row)">编辑</el-button>
-            <el-button type="danger" size="mini" @click="stopItem(scope.row)">停用</el-button>
+            <el-button type="danger" size="mini" @click="stopItem(scope.row)">
+              {{
+              scope.row.status === 0 ? "启用" : "停用"
+              }}
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -97,7 +105,18 @@ export default class TeacherManage extends Vue {
     this.$router.push({ name: "editTeacher", params: { id: phone } });
   }
   stopItem(row): void {
-    const { phone } = row;
+    const { phone, status } = row;
+    this.axios
+      .post("http://localhost:3000/teacher/updateTeacher", {
+        phone,
+        status: !status
+      })
+      .then(res => {
+        const { code } = res.data;
+        if (code === 0) {
+          this.queryData();
+        }
+      });
   }
   addItem(): void {
     this.$router.push({ path: "editTeacher" });
