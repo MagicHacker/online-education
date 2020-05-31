@@ -2,7 +2,7 @@
  * 状态管理
  */
 const state = {
-  username: "",
+  username: ""
 };
 
 export default state;
